@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['discerning-charisma-production.up.railway.app']
 if ENVIRONMENT == 'production':
     CSRF_TRUSTED_ORIGINS = ["https://discerning-charisma-production.up.railway.app"]
     CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 # Application definition
 
