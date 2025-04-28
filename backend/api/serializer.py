@@ -18,13 +18,13 @@ class SoccerBootSerializer(serializers.ModelSerializer):
     class Meta:
         model = SoccerBoot
         fields = ['id','brand', 'line', 'color', 'price', 'rating', 'image']
-        def to_representation(self, instance):
-            representation = super().to__representation(instance)
-            if instance.image:
-                representation['image'] = instance.image.url
-                print(representation['image'])
-            return representation
-
+    def to_representation(self, instance):
+        representation = super().to__representation(instance)
+        if instance.image:
+            representation['image'] = instance.image.url
+            print(representation['image'])
+        return representation
+    
 class BookInChartSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootInCart
