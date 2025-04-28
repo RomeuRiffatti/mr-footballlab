@@ -202,7 +202,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchFilteredProducts = async () => {
       try {
-        const response = await api.get("/get_soccer_boots", {
+        const response = await api.get("get_soccer_boots", {
           params: {
             color,
             brand,
