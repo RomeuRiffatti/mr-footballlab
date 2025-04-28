@@ -1,3 +1,4 @@
+
 import {
   createContext,
   ReactNode,
@@ -5,6 +6,7 @@ import {
   useEffect,
   useContext,
 } from "react";
+import { api } from "../endpoints/api";
 
 export interface Product {
   id: number;
@@ -30,7 +32,7 @@ export interface Brand {
 }
 
 export interface Line {
-  line:string;
+  line: string;
 }
 
 interface CartItem {
@@ -78,11 +80,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/get_boots_in_cart`
-      );
-      const data = await response.json();
-      setCartItems(data);
+      const response = await api.get(`get_boots_in_cart`);
+      setCartItems(response.data);
     } catch (err) {
       console.error("Erro ao buscar itens do carrinho:", err);
     }
@@ -112,18 +111,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     };
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/add_boot_to_cart",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(toCartData),
-        }
-      );
+      const response = await api.post("add_boot_to_cart", toCartData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log("Produto Adicionado ao carrinho!");
-
       // Após adicionar, atualize o carrinho
       await fetchCartItems();
     } catch (err) {
@@ -139,16 +132,11 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       size: bootToIncrease.size,
     };
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/increase_boot_amount_in_cart",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await api.patch("increase_boot_amount_in_cart", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       await fetchCartItems();
     } catch (err) {
       console.log(err);
@@ -162,16 +150,11 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       amount: bootToDecrease.amount,
     };
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/decrease_boot_amount_in_cart",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await api.patch("decrease_boot_amount_in_cart", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       await fetchCartItems();
     } catch (err) {
       console.log(err);
@@ -184,16 +167,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       boot_id: bootToRemove.product.id,
     };
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/remove_boot_from_cart",
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await api.delete("remove_boot_from_cart", {
+        data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       await fetchCartItems();
     } catch (err) {
       console.log(err);
@@ -221,29 +200,46 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    fetch(
-      `http://127.0.0.1:8000/api/get_soccer_boots?color=${color}&brand=${brand}&type=${type}&bootie=${bootie}`
-    )
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+    const fetchFilteredProducts = async () => {
+      try {
+        const response = await api.get("/get_soccer_boots", {
+          params: {
+            color,
+            brand,
+            type,
+            bootie,
+          },
+        });
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos filtrados:", error);
+      }
+    };
+
+    fetchFilteredProducts();
   }, [color, brand, type, bootie]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/get_brands")
-      .then((res) => res.json())
-      .then((data) => setBrands(data))
-      .catch((err) => console.error(err));
-    fetch("http://127.0.0.1:8000/api/get_lines")
-      .then((res) => res.json())
-      .then((data) => setLines(data))
-      .catch((err) => console.error(err));
-    fetch("http://127.0.0.1:8000/api/get_colors")
-      .then((res) => res.json())
-      .then((data) => setColors(data))
-      .catch((err) => console.error(err));
+    const fetchInitialData = async () => {
+      try {
+        const [brandsResponse, linesResponse, colorsResponse] =
+          await Promise.all([
+            api.get("/get_brands"),
+            api.get("/get_lines"),
+            api.get("/get_colors"),
+          ]);
 
-    fetchCartItems();
+        setBrands(brandsResponse.data);
+        setLines(linesResponse.data);
+        setColors(colorsResponse.data);
+      } catch (error) {
+        console.error("Erro ao buscar dados iniciais:", error);
+      } finally {
+        fetchCartItems();
+      }
+    };
+
+    fetchInitialData();
   }, []);
 
   return (

@@ -19,7 +19,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const refresh_token = async () => {
-  const response = await axios.post('refresh', {}, { withCredentials: true });
+  const response = await api.post('refresh', {}, { withCredentials: true });
   return response.data.refreshed;
 };
 
