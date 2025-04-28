@@ -10,6 +10,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 mercadopago = "*"
 djangorestframework-simplejwt = "*"
+django-environ = "*"
 
 [dev-packages]
 
