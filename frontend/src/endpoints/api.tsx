@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://discerning-charisma-production.up.railway.app"
+export const BASE_URL = "https://discerning-charisma-production.up.railway.app/api"
 
 
 
