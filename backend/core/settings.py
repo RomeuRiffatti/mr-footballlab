@@ -108,15 +108,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=ENVIROMENT == 'production'
+    )
 }
-POSTRGRES_LOCALLY = True
-if ENVIRONMENT == 'production' or POSTRGRES_LOCALLY == True:
-    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
