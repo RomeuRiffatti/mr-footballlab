@@ -32,7 +32,7 @@ if ENVIRONMENT == 'development':
 else: 
     DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://discerning-charisma-production.up.railway.app']
 
 if ENVIRONMENT == 'production':
     CSRF_TRUSTED_ORIGINS = ["https://discerning-charisma-production.up.railway.app"]
