@@ -2,6 +2,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Product, useProducts } from "../../contexts/ProductsContext";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { api, BASE_URL } from "../../endpoints/api"; 
 
 const ProductGrid: React.FC = () => {
   const { products, handleAddToCartContext, handleOpenCart } = useProducts();
@@ -22,7 +23,7 @@ const ProductGrid: React.FC = () => {
         <div className="product-card" key={product.id}>
           <Link to={`/product-detail/${product.id}`}>
             <img
-              src={`http://127.0.0.1:8000${product.image}`}
+              src={`${BASE_URL}}${product.image}`}
               alt={product.brand}
               className="product-image"
             />

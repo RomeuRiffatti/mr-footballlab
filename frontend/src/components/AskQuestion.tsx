@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/AskQuestion.css";
+import { api } from "../endpoints/api";
 
 const AskQuestion: React.FC = () => {
   const [name, setName] = useState("");
@@ -16,13 +17,11 @@ const AskQuestion: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/send_question", {
-        method: "POST",
+      const response = await api.post("send_question", data, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      if (response) {
         alert("Pergunta enviada com sucesso!");
         setName("");
         setEmail("");
@@ -38,7 +37,10 @@ const AskQuestion: React.FC = () => {
   return (
     <div className="ask-question">
       <h3>Envie sua pergunta</h3>
-      <p>Está com alguma dúvida? Mande para nossa equipe e responderemos o mais breve possível.</p>
+      <p>
+        Está com alguma dúvida? Mande para nossa equipe e responderemos o mais
+        breve possível.
+      </p>
       <form className="ask-form" onSubmit={handleSubmit}>
         <input
           type="text"

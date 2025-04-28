@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/CheckProducts.css";
 import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import { useProducts } from "../contexts/ProductsContext";
+import { BASE_URL } from "../endpoints/api";
+
 
 interface Product {
   id: number;
@@ -59,7 +61,7 @@ const CheckProducts: React.FC = () => {
           <div className="boots-in-cart-info-container-check">
             <img
               className="boots-in-cart-img-check"
-              src={`http://127.0.0.1:8000${boot.product.image}`}
+              src={`${BASE_URL}${boot.product.image}`}
               alt=""
             />
             <p>

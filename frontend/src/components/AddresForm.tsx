@@ -3,6 +3,8 @@ import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
 import { usePayments } from "../contexts/PaymentsContext";
 import { Wallet } from "@mercadopago/sdk-react";
+import axios from "axios";
+import { api } from "../endpoints/api";
 
 const AddressForm: React.FC = () => {
   const [payerName, setName] = useState("");
@@ -59,27 +61,29 @@ const AddressForm: React.FC = () => {
       phone: phonePreference,
       cep: cepPreference,
       boots: cartItems,
+      total: totalValue, // Adicionei o total que estava sendo calculado mas não enviado
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/finish_order", {
-        method: "POST",
+      // Usando a instância configurada da API
+      const response = await api.post("/finish_order", data, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
       });
-      const result = await response.json();
-      if (!response.ok) {
-        console.error("Erro:", result.error);
-        alert(`Erro ao finalizar pedido: ${result.error}`);
+
+      alert("Você será encaminhado(a) ao WhatsApp para efetuar o pagamento");
+      // Redirecionar ou limpar o carrinho aqui
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage =
+          error.response?.data?.error || error.message || "Erro desconhecido";
+        console.error("Erro na finalização do pedido:", errorMessage);
+        alert(`Erro ao finalizar pedido: ${errorMessage}`);
       } else {
-        alert("Você será encaminhado(a) ao whatsapp para efetuar o pagamento");
-        // Redirecionar ou limpar o carrinho
+        console.error("Erro inesperado:", error);
+        alert("Ocorreu um erro inesperado ao conectar com o servidor");
       }
-    } catch (err) {
-      console.error("Erro:", err);
-      alert("Erro ao conectar com o servidor");
     }
 
     //Pedido para enviar ao Wpp
@@ -87,7 +91,7 @@ const AddressForm: React.FC = () => {
     const pedido = cartItems
       .map(
         (i) =>
-          `${i.product.brand} ${i.product.line} ${i.product.color} http://localhost:8000${i.product.image} \nQuantidade: ${i.amount}\n------------------`
+          `${i.product.brand} ${i.product.line} ${i.product.color} \nQuantidade: ${i.amount}\n------------------`
       )
       .join("\n");
 

@@ -1,12 +1,11 @@
 import axios from "axios";
 
-const LOGIN_URL = "http://127.0.0.1:8000/api/token/";
-const REFRESH_URL = "http://127.0.0.1:8000/api/token/refresh";
-const LOGOUT_URL = "http://127.0.0.1:8000/api/logout/";
-const AUTH_URL = "http://127.0.0.1:8000/api/is_authenticated";
+export const BASE_URL = "https://discerning-charisma-production.up.railway.app"
 
-const api = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+
+
+export const api = axios.create({
+  baseURL: BASE_URL,
   withCredentials: true,
 });
 
@@ -20,7 +19,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const refresh_token = async () => {
-  const response = await axios.post(REFRESH_URL, {}, { withCredentials: true });
+  const response = await axios.post('refresh', {}, { withCredentials: true });
   return response.data.refreshed;
 };
 

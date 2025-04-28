@@ -2,14 +2,14 @@ import { useState } from "react";
 import "../ProductRegistration/SoccerBootRegistrationForm.css";
 import { useProducts } from "../../contexts/ProductsContext";
 import { useRegistry } from "../../contexts/RegistryContext";
-
+import { api } from "../../endpoints/api";
 const SoccerBootRegistrationForm: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>();
   const [line, setLine] = useState("");
   const [brand, setBrand] = useState("");
-  const [color, setColor] = useState("")
-  const [colorCode, setColorCode] = useState("")
+  const [color, setColor] = useState("");
+  const [colorCode, setColorCode] = useState("");
   const [urlPreview, setUrlPreview] = useState<string | null>(null);
 
   const { colors, brands, lines } = useProducts();
@@ -18,53 +18,62 @@ const SoccerBootRegistrationForm: React.FC = () => {
   const types = ["Campo", "Salao", "Suico", "Trava-Mista", "Todas"];
 
   const handleRegistryLine = async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/registry_line", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({line:line}),
-    });
-    window.alert('Registro feito com sucesso!')
+    try {
+      const response = await api.post(
+        "registry_line",
+        { line: line },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      window.alert("Registro feito com sucesso!");
+    } catch (error) {
+      console.error("Erro ao fazer registro:", error);
+      window.alert("Ocorreu um erro ao fazer o registro");
+    }
   };
 
   const handleRegistryBrand = async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/registry_brand", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({brand:brand}),
-    });
-    window.alert('Registro feito com sucesso!')
-
+    const response = await api.post(
+      "registry_brand",
+      { brand: brand },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    window.alert("Registro feito com sucesso!");
   };
 
-  const handleRegistryColor= async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/registry_color", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({color:color, color_code:colorCode}),
-    });
-    window.alert('Registro feito com sucesso!')
-
+  const handleRegistryColor = async () => {
+    const response = await api.post(
+      "registry_color",
+      { color: color, color_code: colorCode },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    window.alert("Registro feito com sucesso!");
   };
-
 
   const handleRegistryProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
+
     if (selectedType) formData.append("type", selectedType);
     if (image) formData.append("boot_image", image);
+
     const bootieValue = formData.get("bootie") ? "on" : "off";
     formData.set("bootie", bootieValue);
+
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/registry_product",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-    } catch (e) {
-      console.log(e);
+      const response = await api.post("registry_product", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      console.error("Erro no registro do produto:", error);
     }
   };
 
@@ -188,9 +197,20 @@ const SoccerBootRegistrationForm: React.FC = () => {
           <h2>Registrar Marcas</h2>
           <div className="input-div">
             <label htmlFor="brand">Marca:</label>
-            <input onChange={(e)=> setBrand(e.target.value)} type="text" name="brand" id="brand" />
+            <input
+              onChange={(e) => setBrand(e.target.value)}
+              type="text"
+              name="brand"
+              id="brand"
+            />
           </div>
-          <button type="button" onClick={handleRegistryBrand} className="save-button">Salvar Marca</button>
+          <button
+            type="button"
+            onClick={handleRegistryBrand}
+            className="save-button"
+          >
+            Salvar Marca
+          </button>
         </div>
       )}
       {isLineOpen && (
@@ -219,11 +239,27 @@ const SoccerBootRegistrationForm: React.FC = () => {
           <h2>Registrar Cores</h2>
           <div className="input-div">
             <label htmlFor="color">Cor:</label>
-            <input onChange={(e) => setColor(e.target.value)} type="text" name="color" id="color" />
+            <input
+              onChange={(e) => setColor(e.target.value)}
+              type="text"
+              name="color"
+              id="color"
+            />
             <label htmlFor="code">Linear Gradient:</label>
-            <input onChange={(e) => setColorCode(e.target.value)} type="text" name="code" id="code" />
+            <input
+              onChange={(e) => setColorCode(e.target.value)}
+              type="text"
+              name="code"
+              id="code"
+            />
           </div>
-          <button onClick={handleRegistryColor} type="button" className="save-button">Salvar Cor</button>
+          <button
+            onClick={handleRegistryColor}
+            type="button"
+            className="save-button"
+          >
+            Salvar Cor
+          </button>
         </div>
       )}
     </div>

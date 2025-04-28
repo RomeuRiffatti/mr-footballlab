@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
-
-import { Link } from 'react-router-dom'
+import { api } from "../endpoints/api";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -18,7 +19,6 @@ const ProductCardCarousel: React.FC = () => {
   const [fade, setFade] = useState<"fade-in" | "fade-out">("fade-in");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-
   useEffect(() => {
     fetchProducts();
     const handleResize = () => {
@@ -29,17 +29,27 @@ const ProductCardCarousel: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/get_soccer_boots"
-      );
-      const data = await response.json();
-      setProducts(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const fetchProducts = async () => {
+      try {
+        console.log("buscandoprodutos");
+        const response = await api.get(
+          "get_soccer_boots"
+        );
+        const data = response.data
+        console.log("FETCH:", data, typeof data);
+
+        setProducts(data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          console.error(
+            "Erro ao buscar produtos:",
+            error.response?.data || error.message
+          );
+        } else {
+          console.error("Erro desconhecido ao buscar produtos:", error);
+        }
+      }
+    };
 
   const rotateLeft = () => {
     const first = products[0];
