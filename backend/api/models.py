@@ -6,16 +6,10 @@ from django.conf import settings
     
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    display_name = models.CharField(max_length=20, null=True, blank=True)
     image = models.ImageField(upload_to='avatars/', null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     cpf = models.IntegerField(null=True, blank=True)
 
-    @property
-    def name(self):
-        if self.display_name:
-            return self.display_name
-        return self.user.username
     
     @property
     def avatar(self):
@@ -79,7 +73,7 @@ class SoccerBoot(models.Model):
         'Trava-Mista': 'Trava Mista',
         'Todas': 'Todas',
     }
-    image = models.ImageField(upload_to='soccer_boots/', null=True)     
+    image = models.ImageField(upload_to='', null=True)     
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
     line = models.ForeignKey(Line, on_delete=models.SET_NULL, null=True)
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True)
@@ -104,7 +98,7 @@ class NewsLetter(models.Model):
         return f'{self.name} | {self.email} | {self.wpp}'
 
 class BootInCart(models.Model):
-    cart_id = models.CharField(max_length=39)
+    cart_id = models.CharField(max_length=100)
     product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.CASCADE, null=True)
     amount = models.IntegerField(default=0)
     size = models.IntegerField(null=True, blank=True)

@@ -11,6 +11,10 @@ django-cors-headers = "*"
 mercadopago = "*"
 djangorestframework-simplejwt = "*"
 django-environ = "*"
+gunicorn = "*"
+whitenoise = "*"
+psycopg = {extras = ["pool", "binary"], version = "*"}
+dj-database-url = "*"
 
 [dev-packages]
 
