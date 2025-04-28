@@ -1,0 +1,49 @@
+# Ambientes virtuais
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Arquivos de configuração secretos
+.env
+.env.local
+*.env
+
+# Bytecode do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite (caso use)
+*.sqlite3
+
+# Logs
+*.log
+
+# Arquivos temporários de IDEs e editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de build (caso use frontend junto)
+build/
+dist/
+node_modules/
+
+# Whitenoise manifest (se usar)
+*.manifest
+
+# Pytest / coverage
+.coverage
+htmlcov/
+.cache/
+
+# Arquivos de banco de dados temporários (caso use SQLite em dev)
+*.db
