@@ -15,7 +15,7 @@ from pathlib import Path
 from environ import Env
 env=Env()
 env.read_env()
-ENVIROMENT=env('ENVIROMENT', default='production')
+ENVIRONMENT=env('ENVIRONMENT', default='production')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if ENVIROMENT == 'development':
+if ENVIRONMENT == 'development':
     DEBUG = True
 else: 
     DEBUG = False
@@ -110,7 +110,7 @@ DATABASES = {
     }
 }
 POSTRGRES_LOCALLY = True
-if ENVIROMENT == 'production' or POSTRGRES_LOCALLY == True:
+if ENVIRONMENT == 'production' or POSTRGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
 # Password validation
