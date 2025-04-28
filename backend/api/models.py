@@ -84,7 +84,7 @@ class SoccerBoot(models.Model):
     stock = models.IntegerField(null=True, blank=True)
     boot_type = models.CharField(max_length=11, choices=BOOT_TYPES, null=True)
     description = models.CharField(max_length=1000, null=True, blank=True)
-    oders = models.ForeignKey(Order, related_name='boots', on_delete=models.SET_NULL, null=True)
+    oders = models.ForeignKey(Order, related_name='boots', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.brand or "Sem Marca"} | {self.line or "Sem Linha"} | {self.boot_type} or "Sem Tipo" | {self.color or "Sem cor"}'
