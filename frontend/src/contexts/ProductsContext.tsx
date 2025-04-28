@@ -224,9 +224,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       try {
         const [brandsResponse, linesResponse, colorsResponse] =
           await Promise.all([
-            api.get("/get_brands"),
-            api.get("/get_lines"),
-            api.get("/get_colors"),
+            api.get("get_brands"),
+            api.get("get_lines"),
+            api.get("get_colors"),
           ]);
 
         setBrands(brandsResponse.data);
