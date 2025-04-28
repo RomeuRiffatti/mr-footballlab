@@ -29,7 +29,7 @@ class Address(models.Model):
     neighborhood = models.CharField(max_length=30)
     address_complement = models.CharField(max_length=6)
     cep = models.CharField(max_length=20)
-    user = models.ForeignKey(Profile, related_name='user_address' ,on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(Profile, related_name='user_address' ,on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.street} | {self.state} | {self.neighborhood}'
@@ -56,7 +56,7 @@ class Line(models.Model):
 class Order(models.Model):
     name = models.CharField(max_length=15, null=True)
     last_name = models.CharField(max_length=40, null=True)
-    address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey(Address, related_name='order_address', on_delete=models.SET_NULL, null=True, blank=True)
     total_price = models.FloatField(null=True)
     status = models.CharField(max_length=12, default='pending')
     payment_id = models.CharField(max_length=100, blank=True, null=True)
@@ -74,9 +74,9 @@ class SoccerBoot(models.Model):
         'Todas': 'Todas',
     }
     image = models.ImageField(upload_to='', null=True)     
-    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
-    line = models.ForeignKey(Line, on_delete=models.SET_NULL, null=True)
-    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True)
+    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True)
+    line = models.ForeignKey(Line, on_delete=models.SET_NULL, null=True, blank=True)
+    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True)
     bootie = models.BooleanField(default=False)
     price = models.FloatField()
     rating = models.IntegerField(null=True, blank=True)
@@ -99,7 +99,7 @@ class NewsLetter(models.Model):
 
 class BootInCart(models.Model):
     cart_id = models.CharField(max_length=100)
-    product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(SoccerBoot, related_name='soccer_boots', on_delete=models.CASCADE, null=True, blank=True)
     amount = models.IntegerField(default=0)
     size = models.IntegerField(null=True, blank=True)
     
