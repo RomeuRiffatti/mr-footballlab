@@ -150,7 +150,7 @@ const Navbar: React.FC = () => {
                 <div className="boots-in-cart-info-container">
                   <img
                     className="boots-in-cart-img"
-                    src={`http://127.0.0.1:8000${boot.product.image}`}
+                    src={`https://discerning-charisma-production.up.railway.app${boot.product.image}`}
                     alt=""
                   />
                   <p>
