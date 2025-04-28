@@ -1,4 +1,4 @@
-!/bin/bash
+
 
 # Verifica se as variáveis essenciais estão definidas
 : "${SECRET_KEY:?SECRET_KEY não definida}"
