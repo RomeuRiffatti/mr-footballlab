@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import "../styles/ProductCardCarousel.css";
-import { api } from "../endpoints/api";
+import { api, BASE_URL } from "../endpoints/api";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -93,7 +93,7 @@ const ProductCardCarousel: React.FC = () => {
         {visibleProducts.map((product) => (
           <div className="product-card-carroussel" key={product.id}>
             <img
-              src={`http://127.0.0.1:8000${product.image}`}
+              src={`${BASE_URL}${product.image}`}
               alt={product.brand}
               className="product-img-caroussel"
             />

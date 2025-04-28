@@ -187,8 +187,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     setColor(selectedColor);
   };
 
-  const changeSelectedBrand = (seletedBrand: string) => {
-    setBrand(seletedBrand);
+  const changeSelectedBrand = (selectedBrand: string) => {
+    setBrand(selectedBrand);
   };
 
   const changeBootie = (selectedBootie: string) => {

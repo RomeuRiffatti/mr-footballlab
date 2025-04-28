@@ -19,7 +19,7 @@ class SoccerBootSerializer(serializers.ModelSerializer):
         model = SoccerBoot
         fields = ['id','brand', 'line', 'color', 'price', 'rating', 'image']
     def to_representation(self, instance):
-        representation = super().to__representation(instance)
+        representation = super().to_representation(instance)
         if instance.image:
             representation['image'] = instance.image.url
             print(representation['image'])

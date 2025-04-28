@@ -64,10 +64,10 @@ def get_soccer_boots(request):
         if bootie_value == 'todas':
             pass
             
-            
     soccer_boots = SoccerBoot.objects.filter(**filters)
     serialized_soccer_boots = SoccerBootSerializer(soccer_boots, many=True).data
     return Response(serialized_soccer_boots)   
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
