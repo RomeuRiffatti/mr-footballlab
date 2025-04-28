@@ -93,7 +93,7 @@ const ProductCardCarousel: React.FC = () => {
         {visibleProducts.map((product) => (
           <div className="product-card-carroussel" key={product.id}>
             <img
-              src={`${BASE_URL}${product.image}`}
+              src={`https://discerning-charisma-production.up.railway.app${product.image}`}
               alt={product.brand}
               className="product-img-caroussel"
             />
