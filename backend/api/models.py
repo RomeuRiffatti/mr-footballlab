@@ -87,7 +87,7 @@ class SoccerBoot(models.Model):
     oders = models.ForeignKey(Order, related_name='boots', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.brand or "Sem Marca"} | {self.line or "Sem Linha"} | {self.boot_type} or "Sem Tipo" | {self.color or "Sem cor"}'
+        return f'{self.brand.brand or "Sem Marca"} | {self.line.line or "Sem Linha"} | {self.boot_type} or "Sem Tipo" | {self.color.color or "Sem cor"}'
 
 class NewsLetter(models.Model):
     name = models.CharField(max_length=30)
