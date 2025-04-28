@@ -26,7 +26,7 @@ const ProductDetailView: React.FC = () => {
   return (
     <div className="detail-container">
       <div className="image-gallery">
-        <img src={`http://127.0.0.1:8000${product.image}`} alt={product.line} />
+        <img src={`https://discerning-charisma-production.up.railway.app${product.image}`} alt={product.line} />
       </div>
 
       <div className="product-info">

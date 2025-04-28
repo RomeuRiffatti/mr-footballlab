@@ -23,7 +23,7 @@ const ProductGrid: React.FC = () => {
         <div className="product-card" key={product.id}>
           <Link to={`/product-detail/${product.id}`}>
             <img
-              src={`${BASE_URL}}${product.image}`}
+              src={`https://discerning-charisma-production.up.railway.app${product.image}`}
               alt={product.brand}
               className="product-image"
             />
