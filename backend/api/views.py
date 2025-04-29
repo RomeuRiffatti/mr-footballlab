@@ -184,7 +184,7 @@ def create_mercado_pago_preference(request):
             return Response({"error": "Dados inválidos"}, status=400)
    
     #Criar preferencia 
-    sdk = mercadopago.SDK('TEST-5227787845718697-091413-0965163face555922a2cd71d78afa2f5-1982894105')
+    sdk = mercadopago.SDK('APP_USR-4695170252611200-041313-795b3d3541d50ab343b6c01bd0ec164c-1982894105')
     preference_data = {
         "items": [
             {
