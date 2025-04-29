@@ -121,6 +121,7 @@ const AddressForm: React.FC = () => {
           <div className="item-div">
             <label htmlFor="nome">Nome: </label>
             <input
+              required
               name="nome"
               id="nome"
               type="text"
@@ -138,7 +139,7 @@ const AddressForm: React.FC = () => {
           </div>
           <div className="item-div">
             <label htmlFor="phone">Celular: </label>
-            <input
+            <input required
               name="phone"
               id="phone"
               type="tel"
@@ -153,26 +154,26 @@ const AddressForm: React.FC = () => {
   <div className="address-column">
     <div className="item-div">
       <label htmlFor="street">Rua:</label>
-      <input id="street" type="text" onChange={(e) => setStreetPreference(e.target.value)} />
+      <input required id="street" type="text" onChange={(e) => setStreetPreference(e.target.value)} />
     </div>
     <div className="item-div">
       <label htmlFor="number">Número:</label>
-      <input id="number" type="number" onChange={(e) => setNumberPreference(Number(e.target.value))} />
+      <input required id="number" type="number" onChange={(e) => setNumberPreference(Number(e.target.value))} />
     </div>
     <div className="item-div">
       <label htmlFor="neighborhood">Bairro:</label>
-      <input id="neighborhood" type="text" onChange={(e) => setNeiborhoodPreference(e.target.value)} />
+      <input required id="neighborhood" type="text" onChange={(e) => setNeiborhoodPreference(e.target.value)} />
     </div>
     <div className="item-div">
       <label htmlFor="city">Cidade:</label>
-      <input id="city" type="text" onChange={(e) => setCityPreference(e.target.value)} />
+      <input required id="city" type="text" onChange={(e) => setCityPreference(e.target.value)} />
     </div>
   </div>
 
   <div className="address-column">
     <div className="item-div">
       <label htmlFor="state">Estado:</label>
-      <input id="state" type="text" onChange={(e) => setStatePreference(e.target.value)} />
+      <input required id="state" type="text" onChange={(e) => setStatePreference(e.target.value)} />
     </div>
     <div className="item-div">
       <label htmlFor="complement">Complemento:</label>
@@ -180,7 +181,7 @@ const AddressForm: React.FC = () => {
     </div>
     <div className="item-div">
       <label htmlFor="cep">CEP:</label>
-      <input id="cep" type="text" onChange={(e) => SetCepPreference(e.target.value)} />
+      <input required id="cep" type="text" onChange={(e) => SetCepPreference(e.target.value)} />
     </div>
   </div>
 </div>

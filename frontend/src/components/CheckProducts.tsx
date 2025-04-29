@@ -61,7 +61,7 @@ const CheckProducts: React.FC = () => {
           <div className="boots-in-cart-info-container-check">
             <img
               className="boots-in-cart-img-check"
-              src={`${BASE_URL}${boot.product.image}`}
+              src={`https://mr-footballlab-production.up.railway.app${boot.product.image}`}
               alt=""
             />
             <p>

@@ -267,7 +267,7 @@ def finish_order(request):
             street=data.get('street'),
             number=int(data.get('number')),
             neighborhood=data.get('neighborhood'),
-            address_complement=data.get('complement', ''),
+            address_complement=data.get('addres_complement', ''),
             cep=data.get('cep'),
             user=None,
         )
