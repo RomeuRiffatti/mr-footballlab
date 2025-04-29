@@ -21,7 +21,7 @@ class Profile(models.Model):
         return self.name
 
 class Address(models.Model):
-    phone = models.IntegerField(null=True, blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
     state = models.CharField(max_length=15)
     city = models.CharField(max_length=30)
     street = models.CharField(max_length=50)
