@@ -11,7 +11,8 @@ from rest_framework_simplejwt.views import (
 
 import mercadopago
 
-
+def test_function(request):
+    return None
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
