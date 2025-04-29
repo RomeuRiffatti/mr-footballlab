@@ -10,7 +10,8 @@ from rest_framework_simplejwt.views import (
 )
 
 import mercadopago
-
+def teste():
+    return None
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
