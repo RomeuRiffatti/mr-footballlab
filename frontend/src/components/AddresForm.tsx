@@ -16,7 +16,7 @@ const AddressForm: React.FC = () => {
   const [statePreference, setStatePreference] = useState("");
   const [addresComplementPreference, setAddresComplementPreference] =
     useState("");
-  const [phonePreference, setPhonePreference] = useState(0);
+  const [phonePreference, setPhonePreference] = useState("");
   const [cepPreference, SetCepPreference] = useState("");
   const { cartItems, clearCartItems } = useProducts();
   const { createPreference, preferenceId } = usePayments();
@@ -144,7 +144,7 @@ const AddressForm: React.FC = () => {
               id="phone"
               type="tel"
               pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
-              onChange={(e) => setPhonePreference(Number(e.target.value))}
+              onChange={(e) => setPhonePreference(e.target.value)}
             />
           </div>
         </div>

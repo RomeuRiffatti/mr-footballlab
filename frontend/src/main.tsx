@@ -12,7 +12,7 @@ const rootElement = document.getElementById("root");
 if (!rootElement) {
   throw new Error("Elemento root não encontrado");
 }
-initMercadoPago("TEST-b09e1c27-3111-4e6c-86a3-ff2036312f46", {
+initMercadoPago("APP_USR-f76f3f9c-4d9f-4839-9c29-e949fc9a3cb2", {
   locale: "pt-BR",
 });
 

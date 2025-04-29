@@ -4,7 +4,7 @@ import { useProducts } from "./ProductsContext";
 import { api } from "../endpoints/api";
 
 interface Addres {
-  phone: number;
+  phone: string;
   street: string;
   number: number;
   neighborhood: string;
