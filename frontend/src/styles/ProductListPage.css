@@ -71,7 +71,6 @@ select {
   color: black;
   font-size: 0.875rem;
   font-weight: bold;
-  margin: 0.25rem;
   padding: 0.5rem;
 }
 
@@ -136,7 +135,7 @@ select {
     border-radius: 12px;
     background-color: #fff;
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
     align-items: center;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
   }
