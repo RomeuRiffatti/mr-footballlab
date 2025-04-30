@@ -215,11 +215,11 @@ def create_mercado_pago_preference(request):
         preference = preference_response['response']
        
         
-        if 'id' not in preference:
-            return Response(
-                {"error": "Failed to create payment preference"},
-                status=500
-            )
+  #      if 'id' not in preference:
+   #         return Response(
+    #            {"error": "Failed to create payment preference"},
+     #          status=500
+      #      )
         
         #Criando objeto Order para salvar dados do pedido e da preferência
         try:
