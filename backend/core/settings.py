@@ -31,10 +31,10 @@ if ENVIRONMENT == 'development':
 else: 
     DEBUG = False
 
-ALLOWED_HOSTS = ['discerning-charisma-production.up.railway.app', 'mr-footballlab-production.up.railway.app']
+ALLOWED_HOSTS = ['discerning-charisma-production.up.railway.app', 'mr-footballlab-production.up.railway.app',"mrfootballab.com.br"]
 
 
-CSRF_TRUSTED_ORIGINS = ["https://discerning-charisma-production.up.railway.app", "https://mr-footballlab-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://discerning-charisma-production.up.railway.app", "https://mr-footballlab-production.up.railway.app","https://mrfootballab.com.br"]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
     
@@ -70,6 +70,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "https://discerning-charisma-production.up.railway.app",
     "https://mr-footballlab-production.up.railway.app",
+    "https://mrfootballab.com.br",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
