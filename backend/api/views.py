@@ -196,9 +196,9 @@ def create_mercado_pago_preference(request):
         ],
          
         "back_urls": {
-            "success": "http://127.0.0.1:5173/catalog",
-            "failure": "http://127.0.0.1:5173/",
-            "pending": "http://127.0.0.1:5173/",
+            "success": "https://mrfootballab.com.br/finish",
+            "failure": "https://mrfootballab.com.br/finish",
+            "pending": "https://mrfootballab.com.br/finish",
         },
         "auto_return": "approved",  
     }
