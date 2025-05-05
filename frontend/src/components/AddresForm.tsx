@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/AddressForm.css";
 import { useProducts } from "../contexts/ProductsContext";
 import { usePayments } from "../contexts/PaymentsContext";
@@ -197,7 +197,7 @@ const AddressForm: React.FC = () => {
 
         {isPaymentOpen && preferenceId && (
           <div className="mercado-pago-container">
-            <Wallet initialization={{ preferenceId: preferenceId }} />
+            <Wallet initialization={{ preferenceId: preferenceId, redirectMode:'blank' }} locale="pt-BR" />
           </div>
         )}
       </form>

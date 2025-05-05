@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/CheckProducts.css";
 import { Plus, Minus, Trash } from "@phosphor-icons/react";
 import { useProducts } from "../contexts/ProductsContext";
-import { BASE_URL } from "../endpoints/api";
+
 
 
 interface Product {
