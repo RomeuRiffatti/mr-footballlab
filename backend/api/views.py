@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 )
 
 import mercadopago
-
+import os
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -184,7 +184,7 @@ def create_mercado_pago_preference(request):
             return Response({"error": "Dados inválidos"}, status=400)
    
     #Criar preferencia 
-    sdk = mercadopago.SDK('APP_USR-4695170252611200-041313-795b3d3541d50ab343b6c01bd0ec164c-1982894105')
+    sdk = mercadopago.SDK(os.getenv('MP_PRIVATE_KEY'))
     preference_data = {
         "items": [
             {

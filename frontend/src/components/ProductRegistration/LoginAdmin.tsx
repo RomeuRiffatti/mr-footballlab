@@ -33,7 +33,7 @@ const LoginAdmin: React.FC = () => {
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            type="password" // Mude para type="password" para segurança
+            type="password" 
             name="password"
             id="password"
             autoComplete="senha"
