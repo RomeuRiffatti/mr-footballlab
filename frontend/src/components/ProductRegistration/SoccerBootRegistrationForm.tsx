@@ -187,6 +187,10 @@ const SoccerBootRegistrationForm: React.FC = () => {
               required
             />
           </div>
+          <div>
+            <label htmlFor="rating">Rating</label>
+            <input type="number" name="rating" id="rating" max={5} min={1} />
+          </div>
           <button className="save-button" type="submit">
             Salvar Produto
           </button>

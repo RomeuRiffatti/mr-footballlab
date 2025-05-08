@@ -330,7 +330,8 @@ def registry_products(request):
         price = float(data.get('price')),
         boot_type = data.get('types'),
         description = data.get('description'),
-        image=request.FILES.get('image')
+        image = request.FILES.get('image'),
+        rating = data.get('rating')
     )
     return Response(status=status.HTTP_201_CREATED)
 
