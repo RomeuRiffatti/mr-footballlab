@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-
+from django.utils.timezone import now
 
     
 class Profile(models.Model):
@@ -61,9 +61,10 @@ class Order(models.Model):
     status = models.CharField(max_length=12, default='pending')
     payment_id = models.CharField(max_length=100, blank=True, null=True)
     preference_id = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateTimeField(default=now, null=True, blank=True)
     
     def __str__(self):
-        return f'{self.name} | {self.last_name}'
+        return f'{self.name} | {self.last_name} | {self.date}' 
     
 class SoccerBoot(models.Model):
     BOOT_TYPES = {
