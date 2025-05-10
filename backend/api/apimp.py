@@ -86,4 +86,7 @@ def create_mercado_pago_preference(request):
 api_view(['POST'])
 @permission_classes([AllowAny])
 def get_webhook(request):
-    return (Response('Rota acessada com sucesso!' ,status=status.HTTP_201_CREATED))
+    order = Order.objects.all().first()
+    order.status = 'Done'
+    order.save()
+    return (Response('Rota acessada com sucesso!', status=status.HTTP_201_CREATED))
