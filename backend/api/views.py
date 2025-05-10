@@ -69,8 +69,6 @@ def get_soccer_boots(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_filtered_boot(request):
-    print(request)
-    print(request.data)
     boot_id = request.GET.get('boot_id')
     boot = SoccerBoot.objects.get(id=boot_id)
     serialized_boot = SoccerBootSerializer(boot).data
