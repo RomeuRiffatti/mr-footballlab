@@ -6,10 +6,11 @@ from rest_framework import status
 from rest_framework.permissions import  AllowAny
 import mercadopago
 import os
-       
+import logging
 import hashlib
 import hmac
 import urllib.parse
+logger = logging.getLogger(__name__)
 
 
 
@@ -23,6 +24,7 @@ def get_webhook(request):
     xSignature = request.headers.get("x-signature")
     xRequestId = request.headers.get("x-request-id")
     if xSignature != "" and xRequestId != "":
+        logger.debug(f"Signature = {xSignature}   xRequest = {xRequestId}", request.headers)  # Exemplo
         return Response(f"Signature = {xSignature}   xRequest = {xRequestId}", status=status.HTTP_200_OK)
     # Obtain Query params related to the request URL
     queryParams = urllib.parse.parse_qs(request.url.query)
