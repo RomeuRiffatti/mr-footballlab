@@ -11,7 +11,6 @@ import hashlib
 import hmac
 import urllib.parse
 
-secret = '760086e9d48b8343c499e7bffdc8f03152d214b7d5214538ec25777450c88ec8'
 
 
 @csrf_exempt    
@@ -50,10 +49,10 @@ def get_webhook(request):
                 hash = value
 
     # Obtain the secret key for the user/application from Mercadopago developers site
-    secret = secret
+    secret = '760086e9d48b8343c499e7bffdc8f03152d214b7d5214538ec25777450c88ec8'
 
     # Generate the manifest string
-    manifest = f"id:{dataID};request-id:{hash};ts:{ts};"
+    manifest = f"id:{dataID};request-id:{xRequestId};ts:{ts};"
 
     # Create an HMAC signature defining the hash type and the key as a byte array
     hmac_obj = hmac.new(secret.encode(), msg=manifest.encode(), digestmod=hashlib.sha256)
