@@ -24,17 +24,17 @@ def get_webhook(request):
     xSignature = request.headers.get("x-signature")
     xRequestId = request.headers.get("x-request-id")
     if xSignature != "" and xRequestId != "":
-        logger.debug(f"Signature = {xSignature}   xRequest = {xRequestId}", request.headers)  # Exemplo
-        return Response(f"Signature = {xSignature}   xRequest = {xRequestId}", status=status.HTTP_200_OK)
+        logger.debug(f"Signature = {xSignature}   xRequest = {xRequestId}",)  
+        
     # Obtain Query params related to the request URL
     queryParams = urllib.parse.parse_qs(request.url.query)
-
+    logger.debug(f"queryParams = {queryParams}")
     # Extract the "data.id" from the query params
     dataID = queryParams.get("data.id", [""])[0]
-
+    logger.debug(f"dataID = {dataID}")
     # Separating the x-signature into parts
     parts = xSignature.split(",")
-
+    logger.debug(f"Parts = {parts}")
     # Initializing variables to store ts and hash
     ts = None
     hash = None
@@ -56,12 +56,13 @@ def get_webhook(request):
 
     # Generate the manifest string
     manifest = f"id:{dataID};request-id:{xRequestId};ts:{ts};"
-
+    logger.debug(f"manifest = {manifest}")
     # Create an HMAC signature defining the hash type and the key as a byte array
     hmac_obj = hmac.new(secret.encode(), msg=manifest.encode(), digestmod=hashlib.sha256)
-
+    logger.debug(f"hmac_obj = {hmac_obj}")
     # Obtain the hash result as a hexadecimal string
     sha = hmac_obj.hexdigest()
+    logger.debug("sha = {sha}")
     if sha == hash:
         order = Order.objects.all().first()
         order.status = 'Feitoooooo'
