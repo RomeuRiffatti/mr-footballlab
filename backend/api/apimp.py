@@ -136,7 +136,7 @@ def get_webhook(request):
     sha = hmac_obj.hexdigest()
     if sha == hash:
         order = Order.objects.all().first()
-        order.status = 'Done'
+        order.status = 'Feitoooooo'
         order.save()
         return (Response('Rota acessada com sucesso!', status=status.HTTP_201_CREATED)) ##funcionando
     else:
