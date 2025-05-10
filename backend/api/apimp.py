@@ -49,7 +49,7 @@ def get_webhook(request):
                 hash = value
 
     # Obtain the secret key for the user/application from Mercadopago developers site
-    secret = '760086e9d48b8343c499e7bffdc8f03152d214b7d5214538ec25777450c88ec8'
+    secret = '833b83c35f6f2f2d132d796099917365ad59df51ca80da24ce1cda92c99d2dfa'
 
     # Generate the manifest string
     manifest = f"id:{dataID};request-id:{xRequestId};ts:{ts};"
