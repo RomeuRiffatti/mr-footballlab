@@ -1,6 +1,7 @@
 from .models import Order
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.permissions import  AllowAny
 import mercadopago
 import os
@@ -85,4 +86,4 @@ def create_mercado_pago_preference(request):
 api_view(['POST'])
 @permission_classes([AllowAny])
 def get_webhook(request):
-    return (Response(status=201))
+    return (Response('Rota acessada com sucesso!' ,status=status.HTTP_201_CREATED))
