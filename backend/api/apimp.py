@@ -27,11 +27,16 @@ def get_webhook(request):
         logger.debug(f"Signature = {xSignature}   xRequest = {xRequestId}",)  
         
     # Obtain Query params related to the request URL
-    queryParams = urllib.parse.parse_qs(request.url.query)
-    logger.debug(f"queryParams = {queryParams}")
+    
+    
+    
+    
+    
     # Extract the "data.id" from the query params
-    dataID = queryParams.get("data.id", [""])[0]
+    dataID = request.POST.get("data.id", [""])
     logger.debug(f"dataID = {dataID}")
+    
+    
     # Separating the x-signature into parts
     parts = xSignature.split(",")
     logger.debug(f"Parts = {parts}")
