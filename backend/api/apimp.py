@@ -22,7 +22,7 @@ def get_webhook(request):
     # Obtain the x-signature value from the header
     xSignature = request.headers.get("x-signature")
     xRequestId = request.headers.get("x-request-id")
-    if xSignature and xRequestId:
+    if xSignature != "" and xRequestId != "":
         return Response(f"Signature = {xSignature}   xRequest = {xRequestId}", status=status.HTTP_200_OK)
     # Obtain Query params related to the request URL
     queryParams = urllib.parse.parse_qs(request.url.query)
