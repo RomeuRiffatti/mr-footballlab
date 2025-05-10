@@ -22,7 +22,8 @@ def get_webhook(request):
     # Obtain the x-signature value from the header
     xSignature = request.headers.get("x-signature")
     xRequestId = request.headers.get("x-request-id")
-
+    if xSignature and xRequestId:
+        return Response(f"Signature = {xSignature}   xRequest = {xRequestId}", status=status.HTTP_200_OK)
     # Obtain Query params related to the request URL
     queryParams = urllib.parse.parse_qs(request.url.query)
 
@@ -63,7 +64,7 @@ def get_webhook(request):
         order = Order.objects.all().first()
         order.status = 'Feitoooooo'
         order.save()
-        return (Response('Rota acessada com sucesso!', status=status.HTTP_201_CREATED)) ##funcionando
+        return (Response('Rota acessada com sucesso!', status=status.HTTP_200_OK)) ##funcionando
     else:
         return (Response('Não validado', status=status.HTTP_400_BAD_REQUEST)) ##funcionando  
 
