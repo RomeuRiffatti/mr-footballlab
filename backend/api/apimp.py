@@ -33,7 +33,7 @@ def get_webhook(request):
     
     
     # Extract the "data.id" from the query params
-    dataID = request.POST.get("data.id", [""])
+    dataID = request.GET.get("data.id", [""])
     logger.debug(f"dataID = {dataID}")
     
     
