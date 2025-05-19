@@ -148,7 +148,8 @@ def decrease_boot_amount_in_cart(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_boots_in_cart(request):
-    boot_in_chart = BootInCart.objects.all()
+    cart_id = request.GET.get('cartID')
+    boot_in_chart = BootInCart.objects.filter(cart_id=cart_id)
     serialized_boots_in_cart = BootInCartSerializer(boot_in_chart, many=True).data
     return Response(serialized_boots_in_cart)    
 

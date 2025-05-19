@@ -79,8 +79,21 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const fetchCartItems = async () => {
+    const getOrCreateCartId = () => {
+      let cartId = localStorage.getItem("cartId");
+      if (!cartId) {
+        cartId = crypto.randomUUID();
+        localStorage.setItem("cartId", cartId);
+      }
+      return cartId;
+    };
+    const cartID = getOrCreateCartId()
     try {
-      const response = await api.get(`get_boots_in_cart`);
+      const response = await api.get(`get_boots_in_cart`, {
+        params: {
+          cartID, 
+        }
+      });
       setCartItems(response.data);
     } catch (err) {
       console.error("Erro ao buscar itens do carrinho:", err);
