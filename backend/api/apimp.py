@@ -26,12 +26,6 @@ def get_webhook(request):
     if xSignature != "" and xRequestId != "":
         logger.debug(f"Signature = {xSignature}   xRequest = {xRequestId}",)  
         
-    # Obtain Query params related to the request URL
-    
-    
-    
-    
-    
     # Extract the "data.id" from the query params
     dataID = request.GET.get("data.id", [""])
     logger.debug(f"dataID = {dataID}")
@@ -72,9 +66,10 @@ def get_webhook(request):
         order = Order.objects.all().first()
         order.status = 'Feitoooooo'
         order.save()
+        logger.debug("Rota acessada com Sucesso!")
         return (Response('Rota acessada com sucesso!', status=status.HTTP_200_OK)) ##funcionando
     else:
-        return (Response('Não validado', status=status.HTTP_400_BAD_REQUEST)) ##funcionando  
+        return (Response('Não validado', status=status.HTTP_400_BAD_REQUEST))
 
 
 @api_view(['POST'])

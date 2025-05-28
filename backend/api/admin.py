@@ -20,13 +20,13 @@ class BootInCartInline(admin.TabularInline):  # ou admin.StackedInline
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'last_name', 'total_price', 'date']
+    list_display = ['id', 'name', 'last_name', 'total_price', 'date', 'status']
     inlines = [BootInCartInline]  # Adiciona a visualização inline
     readonly_fields = ['total_price']  # Se quiser que o preço seja somente leitura
 
     # Opcional: filtros e busca
-    list_filter = ['name', 'last_name']
-    search_fields = ['name', 'last_name', 'address__street']
+    list_filter = ['name', 'last_name', 'status']
+    search_fields = ['name', 'last_name', 'address__street', 'status']
 
     
     
