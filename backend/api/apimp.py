@@ -63,7 +63,7 @@ def get_webhook(request):
     sha = hmac_obj.hexdigest()
     logger.debug("sha = {sha}")
     if sha == hash:
-        order = Order.objects.filter(payment_id='123')
+        order = Order.objects.filter(payment_id='123').first()
         order.status = 'Feitoooooo'
         order.save()
         logger.debug("Rota acessada com Sucesso!")
