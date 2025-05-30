@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 @permission_classes([AllowAny])
 def get_webhook(request):
  
-
+    logger.debug(f"request.data = {request.data}")
     # Obtain the x-signature value from the header
     xSignature = request.headers.get("x-signature")
     xRequestId = request.headers.get("x-request-id")
@@ -63,7 +63,7 @@ def get_webhook(request):
     sha = hmac_obj.hexdigest()
     logger.debug("sha = {sha}")
     if sha == hash:
-        order = Order.objects.all().first()
+        order = Order.objects.filter(payment_id='123')
         order.status = 'Feitoooooo'
         order.save()
         logger.debug("Rota acessada com Sucesso!")
