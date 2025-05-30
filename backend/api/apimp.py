@@ -51,7 +51,7 @@ def get_webhook(request):
                 hash = value
 
     # Obtain the secret key for the user/application from Mercadopago developers site
-    secret = '833b83c35f6f2f2d132d796099917365ad59df51ca80da24ce1cda92c99d2dfa'
+    secret = os.getenv('MP_WEBHOOK')
 
     # Generate the manifest string
     manifest = f"id:{dataID};request-id:{xRequestId};ts:{ts};"
@@ -109,7 +109,7 @@ def create_mercado_pago_preference(request):
         
         if not isinstance(preference_response, dict) or 'response' not in preference_response:
             return Response(
-                {"error": "Invalid response from Mercado Pago"},
+                {"error": "Resposta inválida do Mercado Pago"},
                 status=500
             )
         preference = preference_response['response']

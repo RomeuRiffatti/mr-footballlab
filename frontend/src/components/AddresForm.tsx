@@ -38,80 +38,10 @@ const AddressForm: React.FC = () => {
     setIsPaymentOpen(true);
   };
 
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => {
-      return total + item.product.price * item.amount;
-    }, 0);
-  };
+  
+  
 
-  // Chama o caminho finish_order e fecha o pedido no wpp
-
-  const handleFinishOrderOnWhatsApp = async () => {
-    const totalValue = calculateTotal();
-
-    const data = {
-      name: payerName,
-      last_name: payerLastName,
-      street: streetPreference,
-      number: numberPreference,
-      neighborhood: neighborhoodPreference,
-      city: cityPreference,
-      state: statePreference,
-      addres_complement: addresComplementPreference,
-      phone: phonePreference,
-      cep: cepPreference,
-      boots: cartItems,
-      total: totalValue, // Adicionei o total que estava sendo calculado mas não enviado
-    };
-
-    try {
-      // Usando a instância configurada da API
-      const response = await api.post("/finish_order", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      alert("Você será encaminhado(a) ao WhatsApp para efetuar o pagamento");
-      // Redirecionar ou limpar o carrinho aqui
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const errorMessage =
-          error.response?.data?.error || error.message || "Erro desconhecido";
-        console.error("Erro na finalização do pedido:", errorMessage);
-        alert(`Erro ao finalizar pedido: ${errorMessage}`);
-      } else {
-        console.error("Erro inesperado:", error);
-        alert("Ocorreu um erro inesperado ao conectar com o servidor");
-      }
-    }
-
-    //Pedido para enviar ao Wpp
-
-    const pedido = cartItems
-      .map(
-        (i) =>
-          `${i.product.brand} ${i.product.line} ${i.product.color} \nQuantidade: ${i.amount}\n------------------`
-      )
-      .join("\n");
-
-    const defaultMessage =
-      `*NOVO PEDIDO*\n\n` +
-      `*Cliente:* ${data.name} ${data.last_name}\n` +
-      `*Endereço:* ${data.street}, ${data.number}\n` +
-      `*Complemento:* ${data.addres_complement}` +
-      `${data.neighborhood}, ${data.city}/${data.state}\n` +
-      `CEP: ${data.cep}\n\n` +
-      `*Produtos:*\n${pedido}\n\n` +
-      `*TOTAL DO PEDIDO: R$ ${totalValue.toFixed(2)}*`;
-
-    const phoneNumber = "5548988770408";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      defaultMessage
-    )}`;
-    window.open(whatsappUrl, "_blank");
-    clearCartItems();
-  };
+ 
 
   return (
     <div className="form-container">
@@ -188,10 +118,6 @@ const AddressForm: React.FC = () => {
         <div >
           <button className="finish-shopping-button" type="button" onClick={handleStartPayment}>
             Pagar com Mercado Pago
-          </button>
-
-          <button className="finish-shopping-button"  type="button" onClick={handleFinishOrderOnWhatsApp}>
-            Finalizar no WhatsApp
           </button>
         </div>
 
